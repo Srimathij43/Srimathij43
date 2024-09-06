@@ -1,0 +1,27 @@
+{
+    "name": "radiologies-wishlist/radiologies-wishlist",
+    "description": "radiologies-wishlist/radiologies-wishlist",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "RadiologiesWishlist\\RadiologiesWishlist",
+        "label": {
+            "de-DE": "RadiologiesWishlist plugin",
+            "en-GB": "RadiologiesWishlist plugin"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "RadiologiesWishlist\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RadiologiesWishlist\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+(function(){"use strict";var s={};s.p="bundles/radiologieswishlist/",window?.__sw__?.assetPath&&(s.p=window.__sw__.assetPath+"/bundles/radiologieswishlist/")})();

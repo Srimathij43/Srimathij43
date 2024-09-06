@@ -1,0 +1,90 @@
+{
+    "radiologies-wishlist": {
+        "general": {
+            "defaultListName": "My wishlist",
+            "myList": "My wishlist"
+        },
+        "detail": {
+            "addToList": "Add to wishlist"
+        },
+        "empty":{
+            "data": "No records found",
+            "success":"You have added wishlist name",
+            "updated":"You have updated wishlist product to existing wishlist name"
+        },
+        "modal": {
+            "add-note": {
+                "title": "Add to wishlist",
+                "labelQuantity": "Quantity",
+                "labelExistingList": "Add to existing list",
+                "labelAddNewList": "Create new list",
+                "labelPublicList": "Public list (shareable with Link)",
+                "infoText": "Add the product to an existing list or create a new one",
+                "placeholderAddNewList": "Name of the new list",
+                "btnAdd": "Add to wishlist",
+                "ImportError": "The product with the id %s does not exist (anymore) and could not be imported",
+                "ImportWarning": "The product in row %s could not be imported due to incorrect data",
+                "ImportInvalidHeader": "Can not import wishlist. Invalid header order",
+                "CreateFileHandlingException": "Can not create file handle",
+                "WishlistIdNotExist": "Wishlist with ID %s does not exist",
+                "QuantityNotAllowed": "Quantity %s not allowed for product %s",
+                "AccessDenied": "Access to resource with ID %s denied",
+                "uploadedFileError": "Can not read uploaded file",
+                "ExpectedExampleEntity": "Expected ExampleEntity"
+            },
+            "add-list": {
+                "title": "Create new list",
+                "labelAddNewList": "Create new list",
+                "placeholderAddNewList": "Name of the new list",
+                "btnAdd": "Create"
+            },
+            "delete-list": {
+                "title": "Delete list",
+                "text": "Do you really want to delete the list <strong>%name%</strong>?",
+                "btnConfirm": "Delete",
+                "btnCancel": "Cancel"
+            }
+        },
+        "overview": {
+            "titleListing": "My wishlist",
+            "tooltipAdd": "Add new list",
+            "tooltipDeleteList": "Delete list",
+            "tooltipDeleteNote": "Delete product",
+            "tooltipImport": "Import list",
+            "tooltipExport": "Export list",
+            "tooltipPublic": "Public list",
+            "ExampleImportFileList": "Example import list file",
+            "tooltipPrivate": "Private list",
+            "tooltipRename": "Rename list",
+            "tooltipShareFacebook": "Share on Facebook",
+            "tooltipShareTwitter": "Share on Twitter",
+            "tooltipShareWhatsapp": "Share on WhatsApp",
+            "tooltipShareEmail": "Share via email",
+            "tooltipSharePrint": "Print",
+            "infoListPublic": "This list is marked as public and accessible with the following link:<br/><a href='%link%' target='_blank'><strong>%link%</strong></a>",
+            "infoListPublicAccess": "This is a public list. You will not be able to modify this list.",
+            "infoListLoginToSave": "To save your list permanently, please log in or register.",
+            "checkboxMarkAll": "Mark all",
+            "manualAddFormHeadline": "Add products manually",
+            "manualAddFormSku": "Product number",
+            "manualAddFormQuantity": "Quantity",
+            "manualAddFormAddBtn": "Add",
+            "manualAddFormAddedSuccess": "Successfully added the product to the list. Keep adding more products or refresh the page to see the updated list",
+            "manualAddFormAddedError": "An error occured while adding the product to the list. Either the product number is not correct or the given quantity is not allowed"
+        },
+        "sorting-data": {
+            "sortBy": "Sort by",
+            "sortDirection": "Sort direction",
+            "search": "Search",
+            "productId": "Product Id",
+            "productName": "Product Name",
+            "productPrice": "Product Price",
+            "manualSearch": "Manual Search",
+            "createdAt": "Created At",
+            "ascending": "Ascending",
+            "descending": "Descending",
+            "searchName": "Search by product name...",
+            "apply": "Apply"
+        }
+    }
+}

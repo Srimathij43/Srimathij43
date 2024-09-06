@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+    {% block base_flashbags_checkout %}
+        {{ parent() }}
+      <div class="flashbags">
+        {% set extensions = context.extensions.RadiologiesPartialOrders.get('ordersDetails') %}
+        {% set orderNumber = extensions.orderNumber %}
+        {% set orderStatus = extensions.orderStatus %}
+    
+        {# Check if there are open orders and show alerts accordingly #}
+        {% if orderNumber is not empty %}
+          {% set allOrderNumbers = orderNumber|join(', ') %} {# Join all order numbers into a single string separated by commas #}
+    
+          {% set snippetName = 'RadiologiesCheckout.order.snippet'|trans({ '%orderNumbers%': allOrderNumbers }) %}
+    
+          {# Display the alert message with all order numbers #}
+          {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with { type: 'danger', content: snippetName|sw_sanitize } %}
+        {% endif %}
+      </div>
+    
+    {% endblock %}
+    

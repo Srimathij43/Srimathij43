@@ -1,0 +1,196 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+    {% block base_content %}
+        {% block page_account %}
+            <div class="account account-content row">
+                {% block page_account_sidebar %}
+                    <div class="account-content-aside col-lg-3 col-xl-2 d-none d-lg-block">
+                        {% if context.customer and not context.customer.guest %}
+                            {% sw_include '@Storefront/storefront/page/account/sidebar.html.twig' %}
+                        {% endif %}
+                    </div>
+                {% endblock %}
+                {% block page_account_main %}
+                    <div class="account-content-main col-lg-9 offset-xl-1 col-xl-9">
+                        {% block page_account_main_content %}
+                            <div class="container table-responsive py-5 radiologiesWishlist_container">
+                                <div class="radiologiesWishlist_total_items_container">
+                                    {% if page.radiologiesWishlistData is empty %}
+                                        {{ "radiologies-wishlist.empty.data"|trans|sw_sanitize }}
+                                    {% endif %}
+                                </div>
+                                <form id="wishlist-sort-form" method="GET" action="{{ path('frontend.account.radiologies.wishlist') }}">
+                                    <div class="row">
+                                        <!-- First Column: Sort By -->
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label for="sortType">{{ "radiologies-wishlist.sorting-data.sortBy"|trans|sw_sanitize }}</label>
+                                                <select name="sortType" id="sortType" class="form-control">
+                                                    <option value="productId" {% if sortType == 'productId' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.productId"|trans|sw_sanitize }}
+                                                    </option>
+                                                    <option value="name" {% if sortType == 'name' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.productId"|trans|sw_sanitize }}
+                                                    </option>
+                                                    <option value="price" {% if sortType == 'price' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.productId"|trans|sw_sanitize }}
+                                                    </option>
+                                                    <option value="manual" {% if sortType == 'manual' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.manualSearch"|trans|sw_sanitize }}
+                                                    </option>
+                                                    <option value="createdAt" {% if sortType == 'createdAt' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.createdAt"|trans|sw_sanitize }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Second Column: Sort Direction -->
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label for="sortDirection">{{ "radiologies-wishlist.sorting-data.sortDirection"|trans|sw_sanitize }}</label>
+                                                <select name="sortDirection" id="sortDirection" class="form-control">
+                                                    <option value="ASC" {% if sortDirection == 'ASC' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.ascending"|trans|sw_sanitize }}
+                                                    </option>
+                                                    <option value="DESC" {% if sortDirection == 'DESC' %}selected{% endif %}>
+                                                        {{ "radiologies-wishlist.sorting-data.descending"|trans|sw_sanitize }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Third Column: Search -->
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label for="searchQuery">{{ "radiologies-wishlist.sorting-data.search"|trans|sw_sanitize }}</label></label>
+                                                <input type="text" name="searchQuery" id="searchQuery" class="form-control" 
+                                                placeholder="{{ "radiologies-wishlist.sorting-data.searchName"|trans|sw_sanitize }}" value="{{ searchQuery }}">
+                                            </div>
+                                        </div>
+                                        <!-- Submit Button Column -->
+                                        <div class="col-12 col-md-3 ">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ "radiologies-wishlist.sorting-data.apply"|trans|sw_sanitize }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <table class="table table-bordered table-hover radiologiesWishlist_table">
+                                    <tbody class="radiologiesWishlist_table_body">
+                                        {% for radiologiesWishlistData in page.radiologiesWishlistData %}
+                                            {% set product = radiologiesWishlistData.extensions.productData %}
+                                            {% set name = product.translated.name %}
+                                            {% set cover = product.cover.media %}
+                                            <tr>
+                                                <td>
+                                                    {% block component_product_wishlist %}
+                                                        {% if radiologiesWishlistData.productId is not empty %}
+                                                            {% set addToWishlistOptions = {
+                                                                productId: radiologiesWishlistData.productId,
+                                                                router: {
+                                                                    add: {
+                                                                        afterLoginPath: path('frontend.wishlist.add.after.login', { productId: radiologiesWishlistData.productId }),
+                                                                        path: path('frontend.wishlist.product.add', { productId: radiologiesWishlistData.productId }),
+                                                                    },
+                                                                    remove: {
+                                                                        path: path('frontend.wishlist.product.remove', { productId: radiologiesWishlistData.productId }),
+                                                                    }
+                                                                },
+                                                                texts: {
+                                                                    add: 'listing.addToWishlist'|trans|sw_sanitize,
+                                                                    remove: 'listing.removeFromWishlist'|trans|sw_sanitize
+                                                                },
+                                                            } %}
+                                                    
+                                                            {% set size = size ?? 'md' %}
+                                                    
+                                                            <div class="product-wishlist">
+                                                                {% block component_product_wishlist_button %}
+                                                                    <button
+                                                                        class="product-wishlist-{{ radiologiesWishlistData.productId }} product-wishlist-action{% if appearance == 'circle' %}-circle{% endif %} product-wishlist-not-added product-wishlist-loading"
+                                                                        title="{{ 'listing.addToWishlist'|trans|sw_sanitize }}"
+                                                                        data-add-to-wishlist="true"
+                                                                        data-add-to-wishlist-options="{{ addToWishlistOptions|json_encode }}"
+                                                                    >
+                                                                        {% block component_product_wishlist_icon %}
+                                                                            {% sw_icon 'heart-fill' style { class: 'wishlist icon-wishlist-added', size: size } %}
+                                                                            {% sw_icon 'heart' style {class: 'wishlist icon-wishlist-not-added', size: size } %}
+                                                    
+                                                                            {% if showText %}
+                                                                                <span class="product-wishlist-btn-content product-wishlist-btn-content-{{ size }}">
+                                                                                    {{ 'listing.addToWishlist'|trans|sw_sanitize }}
+                                                                                </span>
+                                                                            {% endif %}
+                                                                        {% endblock %}
+                                                                    </button>
+                                                                {% endblock %}
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                    
+                                                </td>
+                                                <td class="radiologiesWishlist_product_img">                                                   
+                                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': radiologiesWishlistData.productId}) }}" 
+                                                        title="{{ name }}" class="product-image-link is-{{ displayMode }}">
+                                                        {% if cover.url %}
+                                                            {% set attributes = {
+                                                                'class': 'product-image is-'~displayMode,
+                                                                'alt': (cover.translated.alt ?: name),
+                                                                'title': (cover.translated.title ?: name)
+                                                            } %}
+    
+                                                            {% if displayMode == 'cover' or displayMode == 'contain' %}
+                                                                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                                                            {% endif %}
+                                                            {% sw_thumbnails 'product-image-thumbnails' with {
+                                                                media: cover,
+                                                                sizes: {
+                                                                    'xs': '401px',
+                                                                    'sm': '215px',
+                                                                    'md': '327px',
+                                                                    'lg': '133px',
+                                                                    'xl': '184px'
+                                                                }
+                                                            } %}
+                                                        {% else %}
+                                                            <div class="product-image-placeholder">
+                                                                {% sw_icon 'placeholder' style {
+                                                                    'size': 'fluid'
+                                                                } %}
+                                                            </div>
+                                                        {% endif %}
+                                                    </a>
+                                                </td>
+                                                <td class="radiologiesWishlist_product_name">
+                                                    <span>{{ product.translated.name }}</span>
+                                                    <div class="order-item-variants-properties">
+                                                        <div class="order-item-variants-properties-name">
+                                                            <b>{{ product.productNumber }}
+                                                            </b>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="radiologiesWishlist_product_price">
+                                                    {% set price = product.calculatedPrice %}
+                                                        {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+                                                </td>
+                                                <td class="radiologiesWishlist_product_action">
+                                                    {% sw_include '@Storefront/storefront/component/product/card/action.html.twig' %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    {% endblock %}
+    

@@ -1,0 +1,75 @@
+{% sw_extends "@Storefront/storefront/component/product/card/wishlist.html.twig" %}
+
+{% block component_product_wishlist_button %}
+    <button
+        class="product-wishlist-{{ productId }} product-wishlist-action{% if appearance == 'circle' %}-circle{% endif %} product-wishlist-not-added product-wishlist-loading"
+        title="{{ 'listing.addToWishlist'|trans|sw_sanitize }}"
+        data-toggle="modal" data-target="#wishlistModal"
+        id="wishlistButton"
+    >
+        {% block component_product_wishlist_icon %}
+            {% sw_icon 'heart-fill' style { class: 'wishlist icon-wishlist-added', size: size } %}
+            {% sw_icon 'heart' style {class: 'wishlist icon-wishlist-not-added', size: size } %}
+
+            {% if showText %}
+                <span class="product-wishlist-btn-content product-wishlist-btn-content-{{ size }}">
+                    {{ 'listing.addToWishlist'|trans|sw_sanitize }}
+                </span>
+            {% endif %}
+        {% endblock %}
+    </button>
+    <pre>
+        {# {{ dump(page.product.productNumber) }} #}
+    </pre>
+    <!-- Wishlist modal -->
+    <div class="modal fade" id="wishlistModal" data-add-to-radiologies-wishlist tabindex="-1" role="dialog" aria-labelledby="wishlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wishlistModalLabel">{{ "radiologies-wishlist.modal.add-note.title"|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Create new wishlist -->
+                    <form action="{{ path('frontend.radiologies.wishlist.create') }}"
+                        method="post"
+                        data-form-validation="true"
+                        data-form-preserver="true"
+                        id="cms-form-contact">
+                        <div class="form-group">
+                            <label for="wishlistName">{{ "radiologies-wishlist.modal.add-list.title"|trans }}</label>
+                            <input type="text" class="form-control" name="wishlistName" id="wishlistName" placeholder="{{ "radiologies-wishlist.modal.add-list.placeholderAddNewList"|trans }}" required>
+                            <input type="hidden" class="form-control" name="wishlistProductId" id="wishlistProductId" value="{{productId}}">
+                            <input type="hidden" class="form-control" name="wishlistProductNumber" id="wishlistProductNumber" value="{{page.product.productNumber}}">
+                            <button type="submit" class="btn btn-primary mt-2" id="">{{ "radiologies-wishlist.modal.add-list.btnAdd"|trans }}</button>
+                        </div>
+                    </form>
+                    <!-- Add to existing wishlist -->
+                    <form action="{{ path('frontend.radiologies.wishlist.add') }}"
+                        method="post"
+                        data-form-validation="true"
+                        data-form-preserver="true"
+                        id="cms-form-contact">
+                        {% set radiologiesWishlist = page.extensions.radiologiesWishlist.get("radiologiesWishlist") %}
+                        <div class="form-group">
+                            <label for="existingWishlists">
+                                {{ "radiologies-wishlist.modal.add-note.labelExistingList"|trans }}
+                            </label>
+                            <select class="form-control" name="wishlistId" id="existingWishlists">
+                                <option value="">{{ "radiologies-wishlist.modal.add-note.labelExistingList"|trans }}</option>
+                                {% for item in radiologiesWishlist %}
+                                    <option name="wishlistId" value="{{ item.id }}" required>{{ item.name }}</option>
+                                {% endfor %}
+                                <input type="hidden" class="form-control" name="radiologiesWishlistProductId" id="radiologiesWishlistProductId" value="{{productId}}">
+                                <input type="hidden" class="form-control" name="radiologiesWishlistProductNumber" id="radiologiesWishlistProductNumber" value="{{page.product.productNumber}}">
+                            </select>
+                            <button type="submit" class="btn btn-primary mt-2" id="">{{ "radiologies-wishlist.modal.add-note.btnAdd"|trans }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

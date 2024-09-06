@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Minimal configuration</title>
+
+        <input-field type="bool">
+            <name>enableCheckout</name>
+            <label >Activate your plugin</label>
+            <label lang="de-DE">Aktivieren Sie Ihr Plugin</label>
+        </input-field>
+        <component name="sw-snippet-field">
+            <name>snippetField</name>
+            <label>Enter your notes</label>
+            <label lang="de-DE">Geben Sie Ihre Notizen ein</label>
+            <snippet>RadiologiesCheckout.order.snippet</snippet>
+            <helpText>Please enter your test as follows: 'your open orders (%orderNumbers%)'.</helpText>
+            <helpText lang="de-DE">Bitte geben Sie Ihren Test wie folgt ein: 'Ihre offenen Aufträge (%orderNumbers%)'.</helpText>
+        </component>
+    </card>
+
+</config>

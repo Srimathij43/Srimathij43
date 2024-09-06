@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="RadiologiesWishlist\Subscriber\MySubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="radiologies_wishlist.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="sales_channel.product.repository"/>
+        </service>
+
+        <service id="RadiologiesWishlist\Storefront\Controller\RadilogiesWishlistController" public="true">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="radiologies_wishlist.repository"/>
+            <argument type="service" id="RadiologiesWishlist\Storefront\Page\RadiologiesWishlist\RadiologiesWishlistPageLoader" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument>%kernel.shopware_version%</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="RadiologiesWishlist\Core\Content\RadiologiesWishlist\RadiologiesWishlistDefinition">
+            <tag name="shopware.entity.definition" entity="radiologies_wishlist" />
+        </service>
+        <service id="RadiologiesWishlist\Storefront\Page\RadiologiesWishlist\RadiologiesWishlistPageLoader" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Order\SalesChannel\OrderRoute"/>
+            <argument type="service" id="radiologies_wishlist.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+        </service>
+    </services>
+</container>

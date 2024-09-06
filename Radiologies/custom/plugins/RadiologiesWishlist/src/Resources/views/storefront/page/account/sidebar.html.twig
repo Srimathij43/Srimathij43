@@ -1,0 +1,10 @@
+{% sw_extends "@Storefront/storefront/page/account/sidebar.html.twig" %}
+
+{% block page_account_sidebar_link_orders %}
+    {{ parent() }}
+    <a href="{{ path('frontend.account.radiologies.wishlist.list') }}"
+        title="{{ 'account.ordersLink'|trans|striptags }}"
+        class="list-group-item list-group-item-action account-aside-item{% if activeRoute is same as('frontend.account.radiologies.wishlist.list') %} is-active{% endif %}">
+        {{ 'radiologies-wishlist.general.myList'|trans|sw_sanitize }}
+    </a>
+{% endblock %}

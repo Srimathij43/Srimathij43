@@ -1,0 +1,82 @@
+{
+    "bc-wishlist": {
+        "general": {
+            "defaultListName": "Mein Wunschzettel",
+            "myList": "Mein Wunschzettel"
+        },
+        "detail": {
+            "addToList": "Zur Wunschliste hinzufügen"
+        },
+        "modal": {
+            "add-note": {
+                "title": "Zur Wunschliste hinzufügen",
+                "labelQuantity": "Anzahl",
+                "labelExistingList": "Zur Liste hinzufügen",
+                "labelAddNewList": "Neue Liste erstellen",
+                "labelPublicList": "Öffentliche Liste (Teilbar mit Link)",
+                "infoText": "Fügen Sie das Produkt einer vorhandenen Liste hinzu oder erstellen Sie eine neue",
+                "placeholderAddNewList": "Name der neuen Liste",
+                "btnAdd": "Zur Wunschliste hinzufügen",
+                "ImportError": "Das Produkt mit der id %s existiert nicht (mehr) und konnte nicht importiert werden",
+                "ImportWarning": "Das Produkt in Zeile %s konnte aufgrund fehlerhafter Daten nicht importiert werden",
+                "ImportInvalidHeader": "Wunschzettel kann nicht importiert werden. Ungültige Header-Reihenfolge",
+                "CreateFileHandlingException": "Dateihandle kann nicht erstellt werden",
+                "WishlistIdNotExist": "Wishlist mit ID %s existiert nicht",
+                "QuantityNotAllowed": "Menge %s nicht erlaubt für Produkt %s",
+                "AccessDenied": "Zugriff auf Ressource mit ID %s verweigert",
+                "uploadedFileError": "Hochgeladene Datei kann nicht gelesen werden",
+                "ExpectedExampleEntity": "Erwartetes BeispielEntität"
+            },
+            "add-list": {
+                "title": "Neue Liste erstellen",
+                "labelAddNewList": "Neue Liste erstellen",
+                "labelPublicList": "Öffentliche Liste (Teilbar mit Link)",
+                "placeholderAddNewList": "Name der neuen Liste",
+                "btnAdd": "Erstellen"
+            },
+            "delete-list": {
+                "title": "Liste Löschen",
+                "text": "Möchten Sie die Liste <strong>%name%</strong> wirklich löschen?",
+                "btnConfirm": "Löschen",
+                "btnCancel": "Abbrechen"
+            }
+        },
+        "overview": {
+            "titleListing": "Mein Wunschzettel",
+            "tooltipAdd": "Neue Liste hinzufügen",
+            "tooltipDeleteList": "Liste löschen",
+            "tooltipDeleteNote": "Produkt löschen",
+            "tooltipImport": "Liste importieren",
+            "tooltipExport": "Liste exportieren",
+            "tooltipPublic": "Öffentliche Liste",
+            "ExampleImportFileList": "Beispiel für den Import einer Listendatei",
+            "tooltipPrivate": "Private Liste",
+            "tooltipRename": "List umbenennen",
+            "tooltipShareFacebook": "Auf Facebook teilen",
+            "tooltipShareTwitter": "Auf Twitter teilen",
+            "tooltipShareWhatsapp": "Auf WhatsApp teilen",
+            "tooltipShareEmail": "Per Email teilen",
+            "tooltipSharePrint": "Drucken",
+            "infoListPublic": "Diese Liste ist als öffentlich markiert und unter folgendem Link erreichbar:<br/><a href='%link%' target='_blank'><strong>%link%</strong></a>",
+            "infoListPublicAccess": "Das ist eine öffentliche Liste. Sie können keine Listen löschen, hinzufügen oder importieren.",
+            "infoListLoginToSave": "Um Ihre Liste permanent zu speichern, loggen Sie sich bitte ein.",
+            "checkboxMarkAll": "Alle markieren",
+            "manualAddFormHeadline": "Produkte manuell hinzufügen",
+            "manualAddFormSku": "Produkt-Nr.",
+            "manualAddFormQuantity": "Anzahl",
+            "manualAddFormAddBtn": "Hinzufügen",
+            "manualAddFormAddedSuccess": "Das Produkt wurde erfolgreich zur Liste hinzufügt. Fügen Sie weitere Produkte hinzu oder aktualisieren Sie die Seite um Ihre Änderungen zu sehen",
+            "manualAddFormAddedError": "Beim Hinzufügen des Produkts zur Liste ist ein Fehler aufgetreten. Entweder ist die Produktnummer nicht korrekt oder die angegebene Menge ist nicht zulässig"
+        },
+        "sorting-data": {
+            "createdDateAscending": "Erstellungsdatum aufsteigend",
+            "createdDateDescending": "Erstellungsdatum absteigend",
+            "alphabetAscending": "Name A-Z",
+            "alphabetDescending": "Name Z-A",
+            "priceAscending": "Preis aufsteigend",
+            "priceDescending": "Preis absteigend",
+            "quantityAscending": "Menge aufsteigend",
+            "quantityDescending": "Menge absteigend"
+        }
+    }
+}
